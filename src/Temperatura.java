@@ -5,14 +5,10 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.text.DecimalFormat;
-import java.awt.geom.Arc2D;
-import java.io.StringReader;
 
 public class Temperatura extends JFrame{
 
     //Declaracion de variables
-    DecimalFormat df = new DecimalFormat("#.####");
     JLabel lbMensaje,lbFarent, lbCelsius, lbKelvin;
     JTextField txtFarent, txtCelsius, txtKelvin;
     JButton btnCalc, btnCls;
@@ -98,6 +94,7 @@ public class Temperatura extends JFrame{
         btnCls.setBounds(200,170,90,20);
         panel.add(btnCls);
 
+        Cls();
         //ACCION DEL BOTON CALCULAR
         btnCalc.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e)
@@ -105,14 +102,12 @@ public class Temperatura extends JFrame{
         String svalor1 = txtCelsius.getText();
         String svalor2 = txtFarent.getText();
         String svalor3 = txtKelvin.getText();
-                if (!svalor1.equals("")&&((svalor2.equals(""))&&(svalor3.equals("")))){
+                if (!svalor1.equals(" ")&&((svalor2.equals(" "))&&(svalor3.equals(" ")))){
                     try{
                         valor1 = Double.parseDouble(svalor1);
                         resultado1=(valor1*1.8+32);
-                        df.format(resultado1);
                         txtFarent.setText(Double.toString(resultado1));
                         resultado2=valor1+273;
-                        df.format(resultado2);
                         txtKelvin.setText(Double.toString(resultado2));
                     }
                     catch (NumberFormatException e1){
@@ -121,14 +116,20 @@ public class Temperatura extends JFrame{
 
                     }
                 }
-                else if (!svalor2.equals("")&&((svalor1.equals(""))&&(svalor3.equals("")))){
+                else if (!svalor2.equals(" ")&&((svalor1.equals(" "))&&(svalor3.equals(" ")))){
                     try{
                         valor2 = Double.parseDouble(svalor2);
                         resultado1 = ((valor2-32)/1.8);
-                        df.format(resultado1);
+                        //Reduce el numero de Decimales
+                        String cad=String.valueOf(resultado1); //convierte a un string
+                        cad = cad.substring(0,8);              //reduce la hilera del string
+                        resultado1 = Double.parseDouble(cad);  //convierte el string a un double
                         txtCelsius.setText(Double.toString(resultado1));
-                        resultado2 = (((valor2-32)/1.8)+273);
-                        df.format(resultado2);
+
+                        resultado2 = (((valor2-32)/1.8)+273.15);
+                        String cad2=String.valueOf(resultado2);
+                        cad2 = cad2.substring(0,8);
+                        resultado2 = Double.parseDouble(cad2);
                         txtKelvin.setText(Double.toString(resultado2));
                     }
                     catch (NumberFormatException e1){
@@ -136,14 +137,12 @@ public class Temperatura extends JFrame{
                         Cls();
                     }
                 }
-                else if (!svalor3.equals("")&&((svalor2.equals(""))&&(svalor1.equals("")))){
+                else if (!svalor3.equals(" ")&&((svalor2.equals(" "))&&(svalor1.equals(" ")))){
                     try{
                         valor3 = Double.parseDouble(svalor3);
-                        resultado1=valor3-273;
-                        df.format(resultado1);
+                        resultado1=valor3-273.15;
                         txtCelsius.setText(Double.toString(resultado1));
-                        resultado2=(((valor3-273)*1.8)+32);
-                        df.format(resultado2);
+                        resultado2=(((valor3-273.15)*1.8)+32);
                         txtFarent.setText(Double.toString(resultado2));
                     }
                     catch (NumberFormatException e1){
@@ -169,9 +168,9 @@ public class Temperatura extends JFrame{
         });
     }
 public void Cls(){
-        txtFarent.setText("");
-        txtKelvin.setText("");
-        txtCelsius.setText("");
+        txtFarent.setText(" ");
+        txtKelvin.setText(" ");
+        txtCelsius.setText(" ");
     }
 
 }
