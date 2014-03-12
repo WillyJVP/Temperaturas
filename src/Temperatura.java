@@ -1,6 +1,4 @@
-/**
- * Created by VAIO on 10/03/14.
- */
+
 //Importar Librerias
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +11,6 @@ public class Temperatura extends JFrame{
     JTextField txtFarent, txtCelsius, txtKelvin;
     JButton btnCalc, btnCls;
     JPanel panel;
-    String svalor1,svalor2,svalor3;
     double valor1,valor2,valor3,resultado1,resultado2;
 
     public Temperatura(){
