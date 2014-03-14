@@ -4,7 +4,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+
+
 public class Temperatura extends JFrame{
+
+    public static void main(String args[]){
+        new Temperatura().Init();
+
+    }
 
     //Declaracion de variables
     JLabel lbMensaje,lbFarent, lbCelsius, lbKelvin;
@@ -13,12 +20,13 @@ public class Temperatura extends JFrame{
     JPanel panel;
     double valor1,valor2,valor3,resultado1,resultado2;
 
-    public Temperatura(){
-
+    public void Init(){
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         //Crear Ventana
         this.setSize(350, 250);
         this.setVisible(true);
+        this.setLocation(400,200);
 
         //Crear Panel
         panel = new JPanel();
@@ -84,12 +92,14 @@ public class Temperatura extends JFrame{
         btnCalc.setText("Calcular");
         btnCalc.setBounds(30,170,90,20);
         panel.add(btnCalc);
+        btnCalc.setForeground(Color.BLACK);
 
 
         btnCls = new JButton();
         btnCls.setText("Limpiar");
         btnCls.setBounds(200,170,90,20);
         panel.add(btnCls);
+        btnCls.setForeground(Color.black);
 
         Cls();
         //ACCION DEL BOTON CALCULAR
